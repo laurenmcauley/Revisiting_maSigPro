@@ -1,0 +1,101 @@
+---
+title: "GSE64033_env_setup"
+output: html_document
+date: "2023-01-09"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This script will install all necessary packages needed for the analysis of the GSE64033 time series data. 
+
+```{r}
+set.seed(7645378) #for reproducibility
+options(digits=4)
+```
+
+
+```{r}
+#BiocManager installs packages from Bioconductor 
+install.packages("BiocManager")
+library(BiocManager)
+BiocManager::version() 			# check the version - I have 3.16. 
+
+
+BiocManager::install(c("affyio", "affy", "limma", "oligo"), ask=F) # run every time
+# This may be slow because of the large number of dependencies
+library(affy)              # activate library, run every time
+library(affyio)            # activate library, run every time
+library(oligo)             # activate library, run every time
+library(limma)             # activate library, run every time
+
+
+BiocManager::install(c("GEOquery"), ask=F)
+library(GEOquery)
+#BiocManager::install(c("Biobase"), ask=F) ##dont have installed yet - will i need it?
+library(Biobase)
+BiocManager::install(c("knitr"), ask=F)
+library(knitr)
+#BiocManager::install(c("simpleaffy"), ask=F) #there is no package called simpleaffy anymore - will i need a replacement?
+#library(simpleaffy)
+BiocManager::install(c("GenomicRanges"), ask=F)
+library(GenomicRanges)
+BiocManager::install(c("Organism.dplyr"), ask=F)
+library(Organism.dplyr)
+BiocManager::install(c("illuminaio"), ask=F)
+library(illuminaio)
+install.packages("XML", ask=F)
+library(XML)
+install.packages("statmod", ask=F)
+library(statmod)
+install.packages("cgdsr", ask=F) #not available for my version of R - its an old package?
+library(cgdsr)
+install.packages("R2HTML", ask=F)
+library(R2HTML)
+install.packages("hash", ask=F)
+library(hash)
+install.packages("ggplot2", ask=F)
+library(ggplot2)
+install.packages("ggrepel", ask=F)
+library(ggrepel)
+install.packages("gplots", ask=F)
+library(gplots)
+#install.packages("heatmap.plus", ask=F) #not available for this version of R. Says: A version of this package for your version of R might be available elsewhere,see the ideas at https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
+#library(heatmap.plus)
+install.packages("beeswarm", ask=F)
+library(beeswarm)
+install.packages("xtable", ask=F) # let this re-start, hit "yes"
+library(xtable)
+install.packages("dplyr", ask=F)
+library(dplyr)
+install.packages("rmarkdown")  # let this re-start, hit "yes"
+library(rmarkdown)
+install.packages("ggvenn")
+library(ggvenn) #for venn diagrams
+
+```
+
+##MaSigPro##
+```{r}
+BiocManager::install("maSigPro")
+library(maSigPro)
+```
+##Annotating genes##
+```{r}
+#BiocManager::install("biomaRt", ask=F)  #www.bioconductor.org/packages/release/bioc/html/biomaRt.html  #didnt work  - pick up from here - https://stackoverflow.com/questions/41839214/installation-path-not-writable-r-unable-to-update-packages
+#library(biomaRt) # biomaRt v2.46.2 # 
+#citation("biomaRt")
+
+BiocManager::install("illuminaHumanv4.db", ask=F) # v1.26
+library(illuminaHumanv4.db)
+BiocManager::install("huex10sttranscriptcluster.db", ask=F)  
+library(huex10sttranscriptcluster.db)
+library(data.table)
+install.packages("gridExtra")
+library(gridExtra)
+install.packages("cowplot")
+library(cowplot)
+
+```
+
